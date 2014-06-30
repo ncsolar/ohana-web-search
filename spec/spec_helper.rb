@@ -9,19 +9,25 @@ require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'email_spec'
 # require 'capybara/poltergeist'
-require "rack_session_access/capybara"
-require 'webmock/rspec'
+require 'rack_session_access/capybara'
+require "sauce_helper"
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
-# Capybara.register_driver :poltergeist do |app|
-#   Capybara::Poltergeist::Driver.new(app, :js_errors => false)
-# end
+if ENV["RUN_ON_SAUCE"]
+  Capybara.default_driver = :sauce
+  Capybara.javascript_driver = :sauce
+else
+  # Capybara.register_driver :poltergeist do |app|
+  #   Capybara::Poltergeist::Driver.new(app, :js_errors => false)
+  # end
 
-Capybara.javascript_driver = :webkit
-Capybara.default_wait_time = 30
+  Capybara.default_driver = :webkit
+  Capybara.javascript_driver = :webkit
+  Capybara.default_wait_time = 30
+end
 
 RSpec.configure do |config|
 
@@ -43,14 +49,18 @@ RSpec.configure do |config|
   config.order = "random"
 end
 
-require 'vcr'
-VCR.configure do |c|
-  c.configure_rspec_metadata!
-  c.ignore_hosts '127.0.0.1', 'localhost'
-  c.default_cassette_options = { :record => :once }
-  c.cassette_library_dir  = "spec/cassettes"
-  c.hook_into :webmock
-  c.filter_sensitive_data("<GOOGLE_TRANSLATE>") do
-    ENV['GOOGLE_TRANSLATE_API_TOKEN']
+# Disable mocking of URL requests if using Sauce Labs for testing.
+unless ENV["RUN_ON_SAUCE"]
+  require 'webmock/rspec'
+  require 'vcr'
+  VCR.configure do |c|
+    c.configure_rspec_metadata!
+    c.ignore_hosts '127.0.0.1', 'localhost'
+    c.default_cassette_options = { :record => :once }
+    c.cassette_library_dir  = "spec/cassettes"
+    c.hook_into :webmock
+    c.filter_sensitive_data("<GOOGLE_TRANSLATE>") do
+      ENV['GOOGLE_TRANSLATE_API_TOKEN']
+    end
   end
 end

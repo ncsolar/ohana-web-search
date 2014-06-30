@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-feature 'page translation', :js do
+feature 'page translation', :js, :sauce => ENV["RUN_ON_SAUCE"] do
 
   background do
     # use this with poltergeist

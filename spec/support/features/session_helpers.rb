@@ -32,12 +32,12 @@ module Features
 
     # Perform search that returns 1 result that has no address
     def search_for_location_without_address
-      visit('organizations?org_name=Location+with+no+phone')
+      visit('/organizations?org_name=Location+with+no+phone')
     end
 
     # Visit details page that has no address
     def visit_location_with_no_address
-      visit('organizations/location-with-no-phone')
+      visit('/organizations/location-with-no-phone')
     end
 
     # Perform a search that returns no results

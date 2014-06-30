@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-feature 'address formatting' do
+feature 'address formatting', :sauce => ENV["RUN_ON_SAUCE"] do
 
   context 'when no address elements are present', :vcr do
     before(:each) { visit_location_with_no_address }

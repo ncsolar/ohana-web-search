@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-feature "results page search", :js, :vcr do
+feature "results page search", :js, :vcr, :sauce => ENV["RUN_ON_SAUCE"] do
 
   background do
     page.set_rack_session('aggregate_locations' => [])

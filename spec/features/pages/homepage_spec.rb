@@ -1,22 +1,22 @@
 require "spec_helper"
 
-describe "Home page header elements" do
+describe "Home page header elements", :sauce => ENV["RUN_ON_SAUCE"] do
   before(:each) do
     visit "/"
   end
 
-  it 'includes correct title' do
+  it 'includes correct title', :sauce => ENV["RUN_ON_SAUCE"] do
     expect(page).to have_title "Ohana Web Search"
   end
 
-  it 'includes utility links' do
+  it 'includes utility links', :sauce => ENV["RUN_ON_SAUCE"] do
     expect(page).to have_content "About"
     expect(page).to have_content "Contribute"
     expect(page).to have_content "Feedback"
   end
 end
 
-describe "Home page content elements" do
+describe "Home page content elements", :sauce => ENV["RUN_ON_SAUCE"] do
   before(:each) do
     visit "/"
   end
@@ -37,20 +37,20 @@ describe "Home page content elements" do
     end
   end
 
-  it 'displays headers for the emergency links' do
+  xit 'displays headers for the emergency links' do
     within("#emergency-services") do
       expect(page).to have_content "Reporting"
     end
   end
 
-  it 'displays links under the emergency header' do
+  xit 'displays links under the emergency header' do
     within("#emergency-services") do
       expect(page).to have_link "Domestic Violence"
     end
   end
 end
 
-describe "Home page footer elements" do
+describe "Home page footer elements", :sauce => ENV["RUN_ON_SAUCE"] do
   before(:each) do
     visit "/"
   end

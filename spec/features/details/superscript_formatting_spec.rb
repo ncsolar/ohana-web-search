@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-feature 'superscript formatting' do
+feature 'superscript formatting', :sauce => ENV["RUN_ON_SAUCE"] do
 
   scenario 'when the string is safe' do
     VCR.use_cassette('dynamic/location_details/superscript_dynamic',

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-feature 'phone number formatting' do
+feature 'phone number formatting', :sauce => ENV["RUN_ON_SAUCE"] do
 
   scenario 'when separated by dash' do
     VCR.use_cassette('dynamic/location_details/phone_dynamic',

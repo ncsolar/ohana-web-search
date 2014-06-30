@@ -2,21 +2,21 @@ require 'spec_helper'
 
 # Tests the results page pagination component. This only checks one of the three components on the page,
 # as all should be duplicates of each other.
-feature "results page pagination" do
+feature "results page pagination", :vcr, :sauce => ENV["RUN_ON_SAUCE"] do
 
-  scenario 'when there are no results', :vcr do
+  scenario 'when there are no results' do
     search_from_home(:keyword => 'asdfg')
     expect(page).not_to have_selector('.pagination')
   end
 
-  scenario 'when there is only one result', :vcr do
+  scenario 'when there is only one result' do
     search_for_maceo
     within('#floating-results-header .pagination') do
       expect(page).to have_content('1')
     end
   end
 
-  scenario 'on first page with less than 4 pages of results', :vcr do
+  scenario 'on first page with less than 4 pages of results' do
     search_from_home(:keyword=>'youth')
     within('#floating-results-header .pagination') do
       expect(page).to have_selector('.next')
@@ -24,7 +24,7 @@ feature "results page pagination" do
     end
   end
 
-  scenario 'on last page with less than 4 pages of results', :vcr do
+  scenario 'on last page with less than 4 pages of results' do
     search_from_home(:keyword=>'youth')
     go_to_page(3)
     within('#floating-results-header .pagination') do
@@ -33,7 +33,7 @@ feature "results page pagination" do
     end
   end
 
-  scenario 'on first page with more than 5 pages of results', :vcr do
+  scenario 'on first page with more than 5 pages of results' do
     search_from_home
     within('#floating-results-header .pagination') do
       expect(page).to have_selector('.next')
@@ -41,7 +41,7 @@ feature "results page pagination" do
     end
   end
 
-  scenario 'on last page with more than 5 pages of results', :vcr do
+  scenario 'on last page with more than 5 pages of results' do
     search_from_home
     go_to_page(22)
     within('#floating-results-header .pagination') do
@@ -50,7 +50,7 @@ feature "results page pagination" do
     end
   end
 
-  scenario 'less than 3 pages in with more than 5 pages of results', :vcr do
+  scenario 'less than 3 pages in with more than 5 pages of results' do
     search_from_home
     go_to_page(3)
     within('#floating-results-header .pagination') do
@@ -60,7 +60,7 @@ feature "results page pagination" do
     end
   end
 
-  scenario 'more than 3 pages in with more than 5 pages of results', :vcr do
+  scenario 'more than 3 pages in with more than 5 pages of results' do
     search_from_home
     go_to_page(4)
     within('#floating-results-header .pagination') do
@@ -70,7 +70,7 @@ feature "results page pagination" do
     end
   end
 
-  scenario 'less than 3 pages out with more than 5 pages of results', :vcr do
+  scenario 'less than 3 pages out with more than 5 pages of results' do
     search_from_home
     go_to_page(22)
     go_to_page(20)
@@ -81,7 +81,7 @@ feature "results page pagination" do
     end
   end
 
-  scenario 'more than 3 pages out with more than 5 pages of results', :vcr do
+  scenario 'more than 3 pages out with more than 5 pages of results' do
     search_from_home
     go_to_page(22)
     go_to_page(18)

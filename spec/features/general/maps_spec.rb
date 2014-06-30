@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-feature 'search results map' do
+feature 'search results map', :sauce => ENV["RUN_ON_SAUCE"] do
 
   context 'results have entries that have coordinates', :vcr do
     it "displays a results list map" do
@@ -17,7 +17,7 @@ feature 'search results map' do
   end
 end
 
-feature 'detail view map' do
+feature 'detail view map', :sauce => ENV["RUN_ON_SAUCE"] do
 
   context 'location has coordinates', :vcr do
     it "displays a map" do

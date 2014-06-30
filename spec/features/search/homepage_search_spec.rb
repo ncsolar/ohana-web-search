@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-feature "homepage search" do
+feature "homepage search", :sauce => ENV["RUN_ON_SAUCE"] do
 
   scenario 'with keyword that returns results', :vcr do
     search_for_maceo

@@ -1,7 +1,7 @@
 require "spec_helper"
 
 # checks for correct page titles of site pages
-feature 'Site Pages' do
+feature 'Site Pages', :sauce => ENV["RUN_ON_SAUCE"] do
 
   scenario 'when visiting about page directly' do
     visit ('/about')

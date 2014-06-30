@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-feature "info box", :vcr do
+feature "info box", :vcr, :sauce => ENV["RUN_ON_SAUCE"] do
 
   scenario "with keyword that doesn't match info box synonym" do
     visit('/organizations?keyword=food')

@@ -78,7 +78,6 @@ end
 
 group :test do
   #gem 'launchy', '>= 2.2.0'
-  gem 'capybara', '>= 2.2.1'
   gem 'json', '>= 1.8.1'
 
   # For getting access to the session from Capybara.
@@ -87,11 +86,18 @@ group :test do
   # gem 'poltergeist'
   gem 'capybara-webkit'
   gem 'vcr', '>= 2.9.0'
-  gem 'webmock', '>= 1.17.4'
+  gem 'webmock', '>= 1.17.4', :require => false
   gem 'email_spec', '>= 1.5.0'
 end
 
 group :development, :test do
   #gem 'teaspoon' #enable teaspoon to use JasmineJS for performing unit testing on JS code
   gem 'rspec-rails', '>= 2.14.2'
+  gem 'capybara', '>= 2.2.1'
+
+  # For integrating Open Sauce (SauceLabs) for testing.
+  gem "sauce", '~> 3.4.4'
+  # Sauce Connect is required by default.
+  gem "sauce-connect"
+  gem 'parallel_tests'
 end

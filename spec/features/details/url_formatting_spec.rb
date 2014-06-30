@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-feature 'url formatting' do
+feature 'url formatting', :sauce => ENV["RUN_ON_SAUCE"] do
 
   scenario 'when contains https://' do
     VCR.use_cassette('dynamic/location_details/url_dynamic',
