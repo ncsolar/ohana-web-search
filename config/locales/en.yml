@@ -99,6 +99,10 @@ en:
       previous: "<i class='fa fa-chevron-left'></i>"
       next: "<i class='fa fa-chevron-right'></i>"
       truncate: "&hellip;"
+    share:
+      email:
+        subject: "%{location_name} found on %{site_title}"
+        body: Hi, I'd like to share information about %{location_name} with you. For details about this service provider please visit %{location_url}.
     about:
       project_link: 'Visit project on GitHub'
       project_link_url: 'https://github.com/codeforamerica/Ohana-Web-Search'

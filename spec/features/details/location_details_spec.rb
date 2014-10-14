@@ -12,6 +12,12 @@ feature 'location details' do
       expect(page).to have_content('90210')
       expect(page).to have_content('05201')
     end
+
+    it 'includes address elements' do
+      search_for_maceo
+      visit_details
+      expect(page).to have_link('Email', href: "mailto:?Subject=San Maceo Agency found on Ohana Web Search&body=Hi, I'd like to share information about San Maceo Agency with you. For details about this service provider please visit http://www.example.com/locations/sanmaceo-example-agency/san-maceo-agency?keyword=maceo.")
+    end
   end
 
   context 'when you return to the results page from details page', :js, :vcr do
@@ -25,9 +31,16 @@ feature 'location details' do
     end
   end
 
-  scenario 'when the details page is visited directly', :vcr do
-    visit_test_location
-    expect(page).to have_content('2013 Avenue of the fellows')
+  context 'when the details page is visited directly', :vcr do
+    it 'includes the location' do
+      visit_test_location
+      expect(page).to have_content('2013 Avenue of the fellows')
+    end
+
+    it 'includes the share via email link' do
+      visit_test_location
+      expect(page).to have_link('Email', href: "mailto:?Subject=San Maceo Agency found on Ohana Web Search&body=Hi, I'd like to share information about San Maceo Agency with you. For details about this service provider please visit http://www.example.com/locations/sanmaceo-example-agency/san-maceo-agency.")
+    end
   end
 
   context 'when the details page is visited directly with invalid id', :vcr do

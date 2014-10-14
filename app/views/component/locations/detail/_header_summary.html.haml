@@ -20,6 +20,11 @@
           %i{ class: 'fa fa-print' }
           Print
 
+      %span><
+        %a{ href: "mailto:?Subject=#{t('views.share.email.subject', location_name: @location.name, site_title: SETTINGS[:site_title])}&body=#{t('views.share.email.body', location_name: @location.name, location_url: request.original_url)}", class: 'button-utility button-share-email' }
+          %i{ class: 'fa fa-share' }
+          Email
+
       - if location[:coordinates].present?
         %span><
           %a{ class: 'button-utility button-directions', href: "https://maps.google.com/maps?saddr=current+location&daddr=#{address(location)}", target: '_blank' }
