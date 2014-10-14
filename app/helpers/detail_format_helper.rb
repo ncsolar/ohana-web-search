@@ -63,4 +63,16 @@ module DetailFormatHelper
     string = html_escape(string).to_str
     string.gsub(/(?<=[0-9])(?:st|nd|rd|th)/) { content_tag(:sup, $&) }.html_safe
   end
+
+  # Generate a mailto URL for a share via email link.
+  # @return [String] A mailto URL with subject and body filled in.
+  def share_via_email_url
+    "mailto:?Subject=#{t(
+      'views.share.email.subject',
+      location_name: @location.name,
+      site_title: SETTINGS[:site_title])}&body=#{t(
+      'views.share.email.body',
+      location_name: @location.name,
+      location_url: request.original_url)}"
+  end
 end

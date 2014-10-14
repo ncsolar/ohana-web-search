@@ -21,7 +21,7 @@
           Print
 
       %span><
-        %a{ href: "mailto:?Subject=#{t('views.share.email.subject', location_name: @location.name, site_title: SETTINGS[:site_title])}&body=#{t('views.share.email.body', location_name: @location.name, location_url: request.original_url)}", class: 'button-utility button-share-email' }
+        %a.button-utility.button-share-email{ href: "#{share_via_email_url}" }
           %i{ class: 'fa fa-share' }
           Email
 

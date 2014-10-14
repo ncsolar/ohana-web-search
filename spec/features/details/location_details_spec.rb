@@ -16,7 +16,13 @@ feature 'location details' do
     it 'includes address elements' do
       search_for_maceo
       visit_details
-      expect(page).to have_link('Email', href: "mailto:?Subject=San Maceo Agency found on Ohana Web Search&body=Hi, I'd like to share information about San Maceo Agency with you. For details about this service provider please visit http://www.example.com/locations/sanmaceo-example-agency/san-maceo-agency?keyword=maceo.")
+      expect(page).to have_link(
+        'Email',
+        href: "mailto:?Subject=San Maceo Agency found on Ohana Web Search\
+&body=Hi, I'd like to share information about San Maceo Agency with you. \
+For details about this service provider please visit \
+http://www.example.com/locations/sanmaceo-example-agency/\
+san-maceo-agency?keyword=maceo.")
     end
   end
 
@@ -39,7 +45,12 @@ feature 'location details' do
 
     it 'includes the share via email link' do
       visit_test_location
-      expect(page).to have_link('Email', href: "mailto:?Subject=San Maceo Agency found on Ohana Web Search&body=Hi, I'd like to share information about San Maceo Agency with you. For details about this service provider please visit http://www.example.com/locations/sanmaceo-example-agency/san-maceo-agency.")
+      expect(page).to have_link(
+        'Email',
+        href: "mailto:?Subject=San Maceo Agency found on Ohana Web Search\
+&body=Hi, I'd like to share information about San Maceo Agency with you. \
+For details about this service provider please visit \
+http://www.example.com/locations/sanmaceo-example-agency/san-maceo-agency.")
     end
   end
 
