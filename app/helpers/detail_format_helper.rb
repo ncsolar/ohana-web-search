@@ -64,6 +64,9 @@ module DetailFormatHelper
     string.gsub(/(?<=[0-9])(?:st|nd|rd|th)/) { content_tag(:sup, $&) }.html_safe
   end
 
+  # Return a font-awesome icon string for a particular phone type.
+  # @param type [String] The value for a location's phone_type field.
+  # @return [String] The font-awesome icon string.
   def phone_type_icon(type)
     if type == 'fax'
       'fa-print'
