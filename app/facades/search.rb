@@ -21,7 +21,7 @@ class Search
       name: location.name,
       org_name: location.organization.name,
       slug: location.slug,
-      street_address: location.address.street,
+      street_address: "#{location.address.street_1} #{location.address.street_2}",
       city: location.address.city
     }
   end

@@ -9,7 +9,7 @@ module DetailFormatHelper
   # List of fields that determine whether or not to show the
   # Contact section in the details view
   def location_contact_fields
-    [:urls, :emails, :phones, :faxes]
+    [:urls, :emails, :phones]
   end
 
   # Formats address for use in map URLs, image title attributes, etc.
@@ -62,5 +62,15 @@ module DetailFormatHelper
   def superscript_ordinals(string)
     string = html_escape(string).to_str
     string.gsub(/(?<=[0-9])(?:st|nd|rd|th)/) { content_tag(:sup, $&) }.html_safe
+  end
+
+  def phone_type_icon(type)
+    if type == 'fax'
+      'fa-print'
+    elsif type == 'tty'
+      'fa-tty'
+    else
+      'fa-phone-square'
+    end
   end
 end

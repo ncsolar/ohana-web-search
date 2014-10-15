@@ -6,6 +6,8 @@
     %hgroup
       %h1.name{ itemprop: 'name' }
         = superscript_ordinals(@location.name)
+        - if @location.alternate_name
+          = "(#{superscript_ordinals(@location.alternate_name)})"
       - if (@location.organization.name) && (@location.organization.name != @location.name)
         %h2.agency
           = link_to(locations_path(org_name: @location.organization.name)) do
@@ -43,9 +45,9 @@
               %section.phones{ itemscope: '', itemtype: 'http://schema.org/ContactPoint' }
                 - @location.phones.each do |phone|
                   %div
-                    %i{ class: 'fa fa-phone-square' }
+                    %i{ class: "fa #{phone_type_icon(phone.number_type)}" }
                     %span
-                      %span{ itemprop: 'telephone' }
+                      %span{ itemprop: "#{phone.number_type == 'fax' ? 'faxNumber' : 'telephone'}" }
                         = format_phone(phone.number)
                       - if phone.extension.present?
                         %span.phone-extension
@@ -56,18 +58,6 @@
                       - if phone.department
                         %p.phone-department{ itemprop: 'contactType' }
                           = phone.department
-
-            - if @location.faxes.present?
-              %section.faxes
-                - @location.faxes.each do |fax|
-                  %div
-                    %i{ class: 'fa fa-print fax' }
-                    %span
-                      %span{ itemprop: 'faxNumber' }
-                        = format_phone(fax.number)
-                      - if fax.department
-                        %p.fax-department{ itemprop: 'contactType' }
-                          = fax.department
 
       - if @location.contacts.present?
         - @location.contacts.each do |contact|
@@ -87,22 +77,11 @@
                       %span{ itemprop: 'email' }
                         = contact.email
 
-              - if contact.phone.present?
-                %section.phones{ itemscope: '', itemtype: 'http://schema.org/ContactPoint' }
+              - if contact.department.present?
+                %section.department
                   %div
-                    %i{ class: 'fa fa-phone-square' }
-                    %span
-                      %span{ itemprop: 'telephone' }
-                        = format_phone(contact.phone)
-                      - if contact.extension.present?
-                        %span.phone-extension
-                          = contact.extension
-
-              - if contact.fax.present?
-                %section.faxes
-                  %div
-                    %i{ class: 'fa fa-print fax' }
-                    %span{ itemprop: 'faxNumber' }
+                    %i{ class: 'fa fa-institution' }
+                    %span{ itemprop: 'department' }
                       = format_phone(contact.fax)
 
       - if @location.address.present?

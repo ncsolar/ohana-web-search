@@ -1192,13 +1192,6 @@ body {
             text-align: center;
             margin-right: 4px;
           }
-
-          > .fax::after {
-            content: "FAX";
-            font-size: 10px;
-            font-family: $font_san_serif;
-            @include inline-block();
-          }
         }
       }
       > section > section > section:last-child {
