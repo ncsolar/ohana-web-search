@@ -66,8 +66,12 @@
             %section
               %section.contact-name
                 = contact.name
-              %section.contact-title
-                = contact.title
+              %section.contact-details
+                %span.contact-title<
+                  = contact.title
+                - if contact.department.present?
+                  %span.contact-department<
+                    = ", #{contact.department}"
 
               - if contact.email.present?
                 %section.emails{ itemprop: 'email' }
@@ -76,13 +80,6 @@
                     %a{ href: "mailto:#{contact.email}" }
                       %span{ itemprop: 'email' }
                         = contact.email
-
-              - if contact.department.present?
-                %section.department
-                  %div
-                    %i{ class: 'fa fa-institution' }
-                    %span{ itemprop: 'department' }
-                      = format_phone(contact.fax)
 
       - if @location.address.present?
         %section.address-box
