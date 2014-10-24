@@ -31,7 +31,6 @@ admin_site: http://help-houston.herokuapp.com/admin
 # otherwise you won't receive any feedback emails.
 feedback_email:
   to:
-   # - ohanapi@codeforamerica.org
     - nestor_c@hotmail.com
 
 ##########################
